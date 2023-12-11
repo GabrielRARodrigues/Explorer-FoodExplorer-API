@@ -10,8 +10,8 @@ const { compare } = bcryptjs
 const { sign } = jsonwebtoken
 
 class SessionsCreateService {
-  constructor(userRepository) {
-    this.userRepository = userRepository
+  constructor(usersRepository) {
+    this.usersRepository = usersRepository
   }
 
   async execute({ email, password }) {
@@ -25,7 +25,7 @@ class SessionsCreateService {
       )
     }
 
-    const user = await this.userRepository.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
       throw new AppError('E-mail e/ou senha incorreta', 401)

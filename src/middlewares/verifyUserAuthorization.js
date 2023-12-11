@@ -1,10 +1,10 @@
 import AppError from '../utils/errors/AppError.js'
 
-function verifyUserAuthorization(roleToVerify) {
+function verifyUserAuthorization(rolesToVerify) {
   return (request, response, next) => {
     const { role } = request.user
 
-    if (!roleToVerify.includes(role)) {
+    if (!rolesToVerify.includes(role)) {
       throw new AppError('Acesso não autorizado', 401)
     }
 

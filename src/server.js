@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 
 import AppError from './utils/errors/AppError.js'
 import routes from './routes/index.js'
+import uploadConfig from './configs/upload.config.js'
 
 const app = express()
 const PORT = process.env.PORT || 3333
@@ -22,6 +23,9 @@ app.use(
 
 app.use(routes)
 
+//show static image files
+app.use('/files', express.static(uploadConfig.UPLOADS_FOLDER))
+
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
@@ -34,7 +38,7 @@ app.use((error, request, response, next) => {
 
   return response.status(500).json({
     status: 'error',
-    message: error.message
+    message: error.message || 'Internal server error'
   })
 })
 

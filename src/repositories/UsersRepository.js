@@ -14,7 +14,7 @@ class UsersRepository {
   }
 
   async create({ name, email, password }) {
-    const userId = await knex('users').insert(
+    const [userId] = await knex('users').insert(
       {
         name,
         email,
@@ -25,11 +25,11 @@ class UsersRepository {
       ['id']
     )
 
-    return { id: userId }
+    return userId
   }
 
   async update({ id, name, email, password }) {
-    const userId = await knex('users').where({ id }).update(
+    const [userId] = await knex('users').where({ id }).update(
       {
         name,
         email,
@@ -39,7 +39,7 @@ class UsersRepository {
       ['id']
     )
 
-    return { id: userId }
+    return userId
   }
 
   async delete(id) {
