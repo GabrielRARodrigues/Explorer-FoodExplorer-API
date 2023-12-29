@@ -2,9 +2,10 @@
   "name": "foodexplorer-api",
   "version": "1.0.0",
   "description": "API desenvolvida para o teste final do programa Explorer da Rocketseat",
-  "main": "index.js",
+  "main": "./src/server.js",
   "type": "module",
   "scripts": {
+    "start" : "pm2-runtime start ecosystem.config.cjs --env production",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "migrate": "knex migrate:latest",
     "dev": "concurrently \"nodemon ./src/server.js\" \"npm run migrate\""
